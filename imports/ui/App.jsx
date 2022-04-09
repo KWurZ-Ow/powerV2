@@ -1,11 +1,9 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
+import styles from '../styles/plateau.module.css'; 
 
 export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
+  <div className={styles.plateau}>
+    <h1>Power V2 ⚡</h1>
+    <p>Bienvenue sur la nouvelle version</p>
   </div>
 );
