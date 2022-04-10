@@ -1,0 +1,25 @@
+.controles{
+    display: grid;
+    grid-template-rows: 50fr 50fr;
+    gap: 15px;
+}
+.controles>div{
+    border-radius: 10px;
+    box-shadow: 0 0 7px black;
+    background-color: white;
+}
+.onglet{
+    height: 300px;
+}
+#onglet-0{
+    background-color: lime;
+}
+#onglet-1{
+    background-color: cyan;
+}
+#onglet-2{
+    background-color: yellow;
+}
+#onglet-3{
+    background-color: red;
+}

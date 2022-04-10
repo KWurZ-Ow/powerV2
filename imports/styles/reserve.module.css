@@ -1,0 +1,21 @@
+.reserveContainer{
+    display: grid;
+    grid-template-rows: repeat(4, 25fr);
+    gap: 15px;
+}
+.reserve{
+    border-radius: 10px;
+    box-shadow: 0 0 7px black;
+}
+#vert{
+    background-color: #29972D;
+}
+#bleu{
+    background-color: #46A6DE;
+}
+#jaune{
+    background-color: #FFD328;
+}
+#rouge{
+    background-color: #952804;
+}
