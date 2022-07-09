@@ -8,6 +8,8 @@ import SwipeableViews from "react-swipeable-views"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
 
+let Loading = "/loading.gif";
+
 export default function Controles() {
   const [value, setValue] = React.useState(0)
 
@@ -30,27 +32,27 @@ export default function Controles() {
       <div className="ordres">
         <Tabs value={value} onChange={(event, newValue) => setValue(newValue)}>
           <Tab
-            icon={<CheckCircleOutlineIcon />}
+            icon={<img src={Loading} style={{height: "22px"}} />}
             iconPosition="start"
-            label="Joueur 1"
+            label="Vert"
             id="tab1"
           />
           <Tab
             icon={<CheckCircleOutlineIcon />}
             iconPosition="start"
-            label="Joueur 2"
+            label="Bleu"
             id="tab2"
           />
           <Tab
             icon={<HighlightOffIcon />}
             iconPosition="start"
-            label="Joueur 3"
+            label="Jaune"
             id="tab3"
           />
           <Tab
             icon={<HighlightOffIcon />}
             iconPosition="start"
-            label="Joueur 4"
+            label="Rouge"
             id="tab4"
           />
         </Tabs>

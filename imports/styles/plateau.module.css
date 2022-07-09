@@ -1,7 +1,7 @@
 .plateau{
     width: 100%;
     height: 100%;
-    background-image: url("/plateau.png");
+    background-image: url("./plateau.png");
     background-size: cover;
     border-radius: 10px;
     box-shadow: 0 0 7px black;
