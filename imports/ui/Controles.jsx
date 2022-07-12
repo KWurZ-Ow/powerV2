@@ -1,17 +1,23 @@
-import React from "react"
-import "../styles/controles.module.css"
+import React from "react";
 
-import Tabs from "@mui/material/Tabs"
-import Tab from "@mui/material/Tab"
-import SwipeableViews from "react-swipeable-views"
+import "../styles/controles.module.css";
+import OrdresTableau from "./OrdresTableau";
+import { Ordres } from "/imports/api/Ordres";
 
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
-import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import { useTracker } from "meteor/react-meteor-data";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import SwipeableViews from "react-swipeable-views";
+
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
 
 let Loading = "/loading.gif";
 
 export default function Controles() {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = React.useState(0);
+  const ordres = useTracker(() => Ordres.findOne({ color: "red" }));
 
   function TabPanel({ children, value, index, ...other }) {
     return (
@@ -24,7 +30,7 @@ export default function Controles() {
       >
         {value === index && <div>{children}</div>}
       </div>
-    )
+    );
   }
 
   return (
@@ -32,25 +38,49 @@ export default function Controles() {
       <div className="ordres">
         <Tabs value={value} onChange={(event, newValue) => setValue(newValue)}>
           <Tab
-            icon={<img src={Loading} style={{height: "22px"}} />}
+            icon={
+              ordres?.ready ? (
+                <CheckCircleOutlineIcon />
+              ) : (
+                <img src={Loading} style={{ height: "24px" }} />
+              )
+            }
             iconPosition="start"
             label="Vert"
             id="tab1"
           />
           <Tab
-            icon={<CheckCircleOutlineIcon />}
+            icon={
+              ordres?.ready ? (
+                <CheckCircleOutlineIcon />
+              ) : (
+                <img src={Loading} style={{ height: "24px" }} />
+              )
+            }
             iconPosition="start"
             label="Bleu"
             id="tab2"
           />
           <Tab
-            icon={<HighlightOffIcon />}
+            icon={
+              ordres?.ready ? (
+                <CheckCircleOutlineIcon />
+              ) : (
+                <img src={Loading} style={{ height: "24px" }} />
+              )
+            }
             iconPosition="start"
             label="Jaune"
             id="tab3"
           />
           <Tab
-            icon={<HighlightOffIcon />}
+            icon={
+              ordres?.ready ? (
+                <CheckCircleOutlineIcon />
+              ) : (
+                <img src={Loading} style={{ height: "24px" }} />
+              )
+            }
             iconPosition="start"
             label="Rouge"
             id="tab4"
@@ -62,20 +92,28 @@ export default function Controles() {
           onChangeIndex={(index) => setValue(index)}
         >
           <TabPanel value={value} index={0}>
-            Item One
+            <OrdresTableau
+              ordres={ordres?.ordres}
+            />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            <OrdresTableau
+              ordres={ordres?.ordres}
+            />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <OrdresTableau
+              ordres={ordres?.ordres}
+            />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item Four
+            <OrdresTableau
+              ordres={ordres?.ordres}
+            />
           </TabPanel>
         </SwipeableViews>
       </div>
       <div className="logs"></div>
     </div>
-  )
+  );
 }

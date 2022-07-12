@@ -1,0 +1,10 @@
+.ordresTableau{
+    border-collapse: collapse;
+    width: calc(100% - 50px);
+    border-radius: 15px;
+    margin: 25px;
+}
+.ordresTableau td, .ordresTableau th{
+    border: 1px solid black;
+    text-align: center;
+}
