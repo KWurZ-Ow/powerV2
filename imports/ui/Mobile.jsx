@@ -6,17 +6,23 @@ import { Ordres } from "/imports/api/Ordres";
 let Loading = "/loading.gif";
 
 export default function Mobile() {
-    const ordres = useTracker(() => Ordres.findOne({ color: "red" }))
+    const [userColor, setUserColor] = useState("red")
+    const ordres = useTracker(() => Ordres.findOne({ color: userColor }))
+    useEffect(() => {
+      console.log(ordres);
+    }, [ordres])
 
     function handleReady() {
-        Meteor.call('ready', "red", !ordres?.ready)
+        Meteor.call('ready', userColor, !ordres?.ready)
     }
 
     return <>
-        <h1>⚡ Power</h1>
-        <button onClick={handleReady}>{ordres?.ready ? "❌ Pas prêt" : "✅ Prêt"}</button>
+        <div style={{display: "flex", justifyContent: "space-evenly"}}>
+            <h1 onClick={() => setUserColor(userColor == "red" ? "blue" : "red")}>⚡ Power</h1>
+            <button onClick={handleReady}>{ordres?.ready ? "❌ Pas prêt" : "✅ Prêt"}</button>
+        </div>
         <table className="ordresTableau">
-            <thead>
+            <thead style={{color: userColor}}>
                 <tr>
                     <th>Pièce</th>
                     <th>Départ</th>
@@ -27,12 +33,12 @@ export default function Mobile() {
                 {ordres ? ordres?.ordres.map((ordre) => {
                     return (
                         <tr key={ordre.id}>
-                            {ordre.ordres.map((sousOrdre) => {
-                                return <td key={sousOrdre.id}>
+                            {ordre.moves.map((move) => {
+                                return <td key={move.id}>
                                     <input
                                         type="text"
-                                        value={sousOrdre.ordre}
-                                        onChange={(e) => Meteor.call('updateOrdres', e.target.value, "red", ordre.id, sousOrdre.id)}
+                                        value={move.content}
+                                        onChange={(e) => Meteor.call('updateOrdres', e.target.value, userColor, ordre.id, move.id)}
                                         style={{ width: "90%" }} />
                                 </td>;
                             })}

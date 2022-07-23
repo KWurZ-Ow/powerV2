@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../styles/controles.module.css";
 import OrdresTableau from "./OrdresTableau";

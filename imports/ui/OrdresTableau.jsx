@@ -20,8 +20,8 @@ export default function OrdresTableau({ ordres }) {
         {ordres.map((ordre) => {
           return (
             <tr key={ordre.id}>
-              {ordre.ordres.map((sousOrdre) => {
-                return <td key={sousOrdre.id}>{sousOrdre.ordre}</td>;
+              {ordre.moves?.map((move) => {
+                return <td key={move.id}>{move.content}</td>;
               })}
               <td>
                 <button>✔</button>
