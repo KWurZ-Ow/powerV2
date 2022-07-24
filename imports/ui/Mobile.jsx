@@ -2,27 +2,32 @@ import React from "react"
 import { useEffect, useState } from "react"
 import { useTracker } from 'meteor/react-meteor-data';
 import { Ordres } from "/imports/api/Ordres";
+import { LoginMobile } from "./LoginMobile";
+import { Meteor } from 'meteor/meteor';
 
 let Loading = "/loading.gif";
 
 export default function Mobile() {
-    const [userColor, setUserColor] = useState("red")
+    const [userColor, setUserColor] = useState("")
+    const game = useTracker(() => Meteor.user());
     const ordres = useTracker(() => Ordres.findOne({ color: userColor }))
-    useEffect(() => {
-      console.log(ordres);
-    }, [ordres])
 
     function handleReady() {
         Meteor.call('ready', userColor, !ordres?.ready)
     }
+    function handleLogout() {
+        setUserColor("")
+        Meteor.logout();
+    }
 
-    return <>
-        <div style={{display: "flex", justifyContent: "space-evenly"}}>
-            <h1 onClick={() => setUserColor(userColor == "red" ? "blue" : "red")}>⚡ Power</h1>
+    return <>{game ? <>
+        <div style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+            <h1>⚡ Power</h1>
             <button onClick={handleReady}>{ordres?.ready ? "❌ Pas prêt" : "✅ Prêt"}</button>
+            <button onClick={handleLogout}>🔙 Retour</button>
         </div>
-        <table className="ordresTableau">
-            <thead style={{color: userColor}}>
+        {ordres ? <table className="ordresTableau">
+            <thead style={{ color: userColor }}>
                 <tr>
                     <th>Pièce</th>
                     <th>Départ</th>
@@ -30,7 +35,7 @@ export default function Mobile() {
                 </tr>
             </thead>
             <tbody>
-                {ordres ? ordres?.ordres.map((ordre) => {
+                {ordres.ordres.map((ordre) => {
                     return (
                         <tr key={ordre.id}>
                             {ordre.moves.map((move) => {
@@ -44,8 +49,9 @@ export default function Mobile() {
                             })}
                         </tr>
                     );
-                }) : <img src={Loading} style={{ height: "100px" }} />}
+                })}
             </tbody>
-        </table>
-    </>
+        </table> : <img src={Loading} style={{ height: "100px" }} />}
+        
+    </> : <LoginMobile setColor={setUserColor} color={userColor} />}</>
 }

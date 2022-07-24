@@ -1,0 +1,73 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    gap: 10px;
+}
+.radios{
+    display: flex;
+    gap: 10px;
+}
+.radios input{
+    display: none;
+}
+.radios label{
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    border: 0.5px solid black;
+    transition: 0.3s;
+}
+.radios input:checked + label{
+    transform: scale(1.2);
+    border: 1px solid black;
+}
+.radios label:nth-of-type(1){
+    background-color: red;
+}
+.radios label:nth-of-type(2){
+    background-color: cyan;
+}
+.radios label:nth-of-type(3){
+    background-color: yellow;
+}
+.radios label:nth-of-type(4){
+    background-color: lime;
+}
+.failed{
+    animation: failAnimation 1s;
+}
+@keyframes failAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-5px);
+    }
+    20% {
+        transform: translateX(5px);
+    }
+    30% {
+        transform: translateX(-5px);
+    }
+    40% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    60% {
+        transform: translateX(5px);
+    }
+    70% {
+        transform: translateX(-5px);
+    }
+    80% {
+        transform: translateX(5px);
+    }
+    90% {
+        transform: translateX(0);
+    }
+}
